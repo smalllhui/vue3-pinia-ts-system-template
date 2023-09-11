@@ -1,0 +1,27 @@
+# api接口测试 vscode需安装插件:REST Client
+
+# 操作步骤：选中请求方法部分->右击->Send Request
+
+# 设置域名
+@host = http://localhost
+# 设置端口为 9001
+@port = 8080
+
+@contentPath = 8080
+
+# 用户登录
+POST {{host}}:{{port}}/{{contentPath}}/user/login
+Content-Type: application/json
+# 账号与密码一样 提供三个账号测试：admin、user、guest
+{
+  "userAccount": "admin",
+  "userPassword": "admin",
+  "captcha": "777"
+}
+
+# 查询用户权限菜单列表
+GET  {{host}}:{{port}}/{{contentPath}}/user/queryMenuList
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2OTMxNjkzNTcsImV4cCI6MTY5Mzc3NDE1N30.1xO0o6LJq9rhTblTtlKkP19jkWjvhwlrmyVBvytgojQ
+
+

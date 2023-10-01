@@ -4,45 +4,22 @@
 -->
 <template>
   <el-container class="layout-container">
-    <left-menu
-      :isCollapse="isCollapse"
-      :activeRoutePath="activeRoutePath"
-      :logoSrc="menuInfo.logoSrc"
-      :sysTitle="menuInfo.title"
-      :menuBackColor="menuInfo.menuBackColor"
-      :menuActiveBackColor="menuInfo.menuActiveBackColor"
-      :menuTextColor="menuInfo.menuTextColor"
-      :menuActiveTextColor="menuInfo.menuActiveTextColor"
-      :menuIsUnique="menuInfo.menuIsUnique"
-      :menuList="menuInfo.menuList"
-    />
+    <left-menu :isCollapse="isCollapse" :activeRoutePath="activeRoutePath" :logoSrc="menuInfo.logoSrc"
+      :sysTitle="menuInfo.title" :menuBackColor="menuInfo.menuBackColor"
+      :menuActiveBackColor="menuInfo.menuActiveBackColor" :menuTextColor="menuInfo.menuTextColor"
+      :menuActiveTextColor="menuInfo.menuActiveTextColor" :menuIsUnique="menuInfo.menuIsUnique"
+      :menuList="menuInfo.menuList" />
     <el-container class="right-container">
       <el-header class="header-wrapper">
-        <top-header
-          :isCollapse="isCollapse"
-          :currentPathList="currentPathList"
-          :avatar="userInfo.userAvatar"
-          :user-nick="userInfo.userNick"
-          :operation-list="operationList"
-          @toggle-collapse="handleToggleCollapse"
-          @on-refresh="handleRefresh"
-          @on-command="handleCommand"
-        />
+        <top-header :isCollapse="isCollapse" :currentPathList="currentPathList" :avatar="userInfo.userAvatar"
+          :user-nick="userInfo.userNick" :operation-list="operationList" @toggle-collapse="handleToggleCollapse"
+          @on-refresh="handleRefresh" @on-command="handleCommand" />
       </el-header>
-      <tabs-view
-        :active-tag-path="activeTagPath"
-        :tag-list="tagList"
-        @on-refresh="handleRefresh"
-        @on-close-current="handleCloseCurrentTag"
-        @on-close-other="handleCloseOtherTab"
-        @on-close-tag-by-path="handleCloseTagByPath"
-      />
-      <el-main
-        class="content-wrapper"
-        v-loading="isRefresh"
-        element-loading-text="页面加载中"
-        element-loading-background="rgba(0,0,0,0.5)"
-      >
+      <tabs-view :active-tag-path="activeTagPath" :tag-list="tagList" @on-refresh="handleRefresh"
+        @on-close-current="handleCloseCurrentTag" @on-close-other="handleCloseOtherTab"
+        @on-close-tag-by-path="handleCloseTagByPath" />
+      <el-main class="content-wrapper" v-loading="isRefresh" element-loading-text="页面加载中"
+        element-loading-background="rgba(0,0,0,0.5)">
         <!-- vue3.0配置 Component是固定写法 必须加上key--->
         <router-view v-slot="{ Component }" v-if="!isRefresh">
           <transition name="fade">
@@ -168,6 +145,7 @@ function handleRefresh() {
   width: 100vw;
   overflow: hidden;
 }
+
 .right-container {
   display: flex;
   flex-direction: column;

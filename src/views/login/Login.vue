@@ -1,6 +1,6 @@
 <!--
  * @Author: PanZongHui
- * @Description:用户登录页面
+ * @Description:用户登录页面 不用与后端交互
 -->
 <template>
   <div class="container">
@@ -50,7 +50,6 @@
               </div>
 
               <div class="captcha-image">
-                <!-- <img src="" alt=""> -->
                 <div class="img_text">7777</div>
               </div>
             </div>
@@ -116,7 +115,7 @@ import type { FormInstance, FormRules } from 'element-plus'
 import logoImg from '@/assets/images/logo.svg'
 import { generateRouteList } from '@/utils/RouteMenuUtil'
 import { initDynamicRouters } from '@/router'
-import { userLogin, queryMenuList } from '@/api/UserApi'
+import { routerTestData } from '@/temp/routerTestData'
 import { saveToken } from '@/utils/TokenUtil'
 import useMenuStore from '@/store/modules/menu'
 import useUserStore from '@/store/modules/user'
@@ -183,25 +182,25 @@ const handleLogin = (formEl: FormInstance | undefined) => {
   if (!formEl) return
   formEl.validate(async (valid): Promise<boolean | undefined> => {
     if (valid) {
-      const resultUser = await userLogin(
-        loginForm.userAccount,
-        loginForm.userPassword,
-        loginForm.captcha,
-      )
+      const resultUser = {
+        data: {
+          userInfo: {
+            userNick: '追忆似水年华',
+            userAvatar:
+              'https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar',
+          },
+          token: 'token-123',
+        },
+      }
       // 保存用户信息
-      console.log('resultUser', resultUser)
       userStore.saveUserInfo(resultUser.data)
       saveToken(resultUser.data.token)
 
       // 保存系统菜单
-      const resultMenu = await queryMenuList()
-      const menuList = resultMenu.data.menuList || []
-      console.log('resultMenu')
-      console.log(resultMenu)
-      menuStore.saveMenuList(menuList)
+      menuStore.saveMenuList(routerTestData)
 
       // 生成路由菜单
-      const routeList = generateRouteList(menuList)
+      const routeList = generateRouteList(routerTestData)
       console.log('routeList')
       console.log(routeList)
 
